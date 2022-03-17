@@ -5,6 +5,12 @@
 
 See [noaa_sdk](https://pypi.org/project/noaa-sdk/) for details on package used
 
+This project will roll out updated versions weekly until completion. Week 3 is the start of the actual code base.
+
+## Table of Contents
+
+- [Module 3: Downloading Weather Data](mod_3/README.md)
+
 ## Code used
 
 ```python
