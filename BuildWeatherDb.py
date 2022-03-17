@@ -1,14 +1,14 @@
 # Purpose: Build weather database from NOAA data
-# Name: Your name
-# Date: the date
-#   See https://pypi.org/project/noaa-sdk/ for details on noaa_sdk package used
+# Name: Ben Hill
+# Date: 3/16/2022
+# See https://pypi.org/project/noaa-sdk/ for details on noaa_sdk package used
 
 from noaa_sdk import noaa
 import sqlite3
 import datetime
 
 # parameters for retrieving NOAA weather data
-zipCode = "90808"  # change to your postal code
+zipCode = "98270"  # change to your postal code
 country = "US"
 # date-time format is yyyy-mm-ddThh:mm:ssZ, times are Zulu time (GMT)
 # gets the most recent 14 days of data
