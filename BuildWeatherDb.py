@@ -1,61 +1,34 @@
 # Purpose: Build weather database from NOAA data
+# Name: Your name
+# Date: the date
+#   See https://pypi.org/project/noaa-sdk/ for details on noaa_sdk package used
 
-- Name: Ben Hill
-- Date: 3/16/2022
-
-See [noaa_sdk](https://pypi.org/project/noaa-sdk/) for details on package used
-
-This project will roll out updated versions weekly until completion. Week 3 is the start of the actual code base.
-
-## Table of Contents
-
-- [Module 3: Downloading Weather Data](mod_3/README.md)
-
-## Code used
-
-```python
 from noaa_sdk import noaa
 import sqlite3
 import datetime
-```
 
-### Parameters for retrieving NOAA weather data
-
-```python
+# parameters for retrieving NOAA weather data
 zipCode = "90808"  # change to your postal code
-country = "US" 
+country = "US"
 # date-time format is yyyy-mm-ddThh:mm:ssZ, times are Zulu time (GMT)
 # gets the most recent 14 days of data
 today = datetime.datetime.now()
 past = today - datetime.timedelta(days=14)
-startDate = past.strftime("%Y-%m-%dT00:00:00Z") 
+startDate = past.strftime("%Y-%m-%dT00:00:00Z")
 endDate = today.strftime("%Y-%m-%dT23:59:59Z")
-```
 
-### Create connection - If database does not exist
-
-```python
+# create connection - this creates database if not exist
 print("Preparing database...")
 dbFile = "weather.db"
 conn = sqlite3.connect(dbFile)
-```
-
-### Create cursor to execute SQL commands
-
-```python
+# create cursor to execute SQL commands
 cur = conn.cursor()
-```
 
-### Drop previous version of table if any so we start fresh each time
-
-```python
+# drop previous version of table if any so we start fresh each time
 dropTableCmd = "DROP TABLE IF EXISTS observations;"
 cur.execute(dropTableCmd)
-```
 
-### Create new table to store observations
-
-```python
+# create new table to store observations
 createTableCmd = """ CREATE TABLE IF NOT EXISTS observations ( 
                         timestamp TEXT NOT NULL PRIMARY KEY, 
                         windSpeed REAL,
@@ -66,22 +39,15 @@ createTableCmd = """ CREATE TABLE IF NOT EXISTS observations (
                         visibility INTEGER,
                         textDescription TEXT
                      ) ; """
-
 cur.execute(createTableCmd)
 print("Database prepared")
-```
 
-### Get hourly weather observations from NOAA Weather Service API
-
-```python
+# Get hourly weather observations from NOAA Weather Service API
 print("Getting weather data...")
 n = noaa.NOAA()
-observations =  n.get_observations(zipCode,country,startDate,endDate)
-```
+observations = n.get_observations(zipCode, country, startDate, endDate)
 
-### Populate table with weather observations
-
-```python
+# populate table with weather observations
 print("Inserting rows...")
 insertCmd = """ INSERT INTO observations 
                     (timestamp, windSpeed, temperature, relativeHumidity, 
@@ -104,4 +70,3 @@ if count > 0:
     cur.execute("COMMIT;")
 print(count, "rows inserted")
 print("Database load complete!")
-```
