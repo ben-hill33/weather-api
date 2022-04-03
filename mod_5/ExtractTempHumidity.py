@@ -29,7 +29,7 @@ row_count = len(all_rows)//2
 rows = all_rows[row_count:]
 
 # write data to output file
-with open(output_file_name, "w") as outf:
+with open(output_file_name, "w+") as outf:
     outf.write("Celsius, Fahrenheit, Humidity")
     outf.write("\n")
     for row in rows:
