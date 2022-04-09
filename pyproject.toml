@@ -1,3 +1,19 @@
+[tool.poetry]
+name = "weather-api"
+version = "0.1.0"
+description = ""
+authors = ["ben hill <benjamin.hill28@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+matplotlib = "^3.5.1"
+pandas = "^1.4.2"
+jupyter = "^1.0.0"
+numpy = "^1.22.3"
+noaa-sdk = "^0.1.21"
+
+[tool.poetry.dev-dependencies]
+
 [build-system]
-    requires = ["setuptools", "wheel"]
-    build_backend = "setuptools.build_meta:__legacy__"
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
