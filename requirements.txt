@@ -1,5 +1,0 @@
-matplotlib
-pandas
-jupyter
-numpy
-noaa-sdk
